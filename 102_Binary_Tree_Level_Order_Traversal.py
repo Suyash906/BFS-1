@@ -6,7 +6,7 @@ class TreeNode:
         self.left = left
         self.right = right
 
-class Solution:
+class BFS:
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
         if not root:return []
         
@@ -25,4 +25,21 @@ class Solution:
                     q.append(node.right)
                 size-=1
             res.append(curr)
+        return res
+
+class DFS:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        res = []
+        def dfs(root, depth):
+            nonlocal res
+            ## base
+            if not root:
+                return
+            
+            if len(res) == depth:
+                res.append([])
+            res[depth].append(root.val)
+            dfs(root.left, depth+1)
+            dfs(root.right, depth+1)
+        dfs(root, 0)
         return res        
